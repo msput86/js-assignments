@@ -450,7 +450,31 @@ function check(str, bracketsConfig) {
  *
  */
 function timespanToHumanString(startDate, endDate) {
-    throw new Error('Not implemented');
+  let diff = (endDate - startDate)/1000;
+  
+  if (diff<=45) return 'a few seconds ago';
+  if (diff<=90) return 'a minute ago';
+
+  diff = diff/60;
+  if (diff<=45) return Math.round(diff-0.00000001)+' minutes ago';
+  if (diff<=90) return 'an hour ago';
+
+  diff = diff/60;
+  console.log(diff, Math.round(diff-0.00000001));
+  if (diff<=22) return Math.round(diff-0.00000001)+' hours ago';
+  if (diff<=36) return 'a day ago';
+
+  diff = diff/24;
+  if (diff<=25) return Math.round(diff-0.00000001)+' days ago';
+  if (diff<=45) return 'a month ago';
+
+  //diff = Math.round(diff/30);
+  if (diff<=345) return Math.round(diff/30)+' months ago';
+  if (diff<=545) return 'a year ago';
+
+  return Math.round(diff/365)+' years ago';
+
+  // 546 days+                   |  2 years ago ... 20 years ago
 }
 
 
